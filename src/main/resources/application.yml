@@ -10,7 +10,6 @@ spring:
     cache: false
     mode: HTML
     encoding: UTF-8
-
   datasource:  
     url: jdbc:mysql://localhost:3306/psi?serverTimezone=UTC&characterEncoding=utf-8&useUnicode=true  
     username: root  
