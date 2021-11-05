@@ -2,22 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="BIG5">
-<title>�Ȥ��ƺ��@</title>
+<title>客戶維護</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 </head>
+
 <body>
 	<div class="container my-2">
-		<!-- Header -->
-		<div th:include="header::header"></div>
-		<!-- Content -->
-		<h1>�s�W�Ȥ���</h1>
-		
-		
-		<!-- Footer -->
-		<div th:include="footer::footer"></div>
+		<div th:include="header :: header"></div>
+		<h1>新增客戶</h1>
+		<form action="#" th:action="@{/customer/create}"
+			th:object="${customer}" method="post">
+			<div class="form-group">
+				<label for="name">Name:</label> 
+				<input type="text" th:field="*{name}" id="name"
+					placeholder="Name" class="form-control">
+			</div>
+			<input type="submit" value="新增客戶" class="btn btn-primary">
+		</form>
+		<p />
+		<h1>全部客戶列表</h1>
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>序號</th>
+					<th>客戶名稱</th>
+					<th>下單</th>
+					<th>編輯</th>
+					<th>刪除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${customers}">
+					<td th:text="${customer.id}"></td>
+					<td th:text="${customer.name}"></td>
+					<td><a th:href="@{/order/?customer_id={cid}(cid=${customer.id})}" class="btn btn-success">下單</a></td>
+					<td><a th:href="@{/customer/edit/{id}(id=${customer.id})}" class="btn btn-primary">編輯</a></td>
+					<td><a th:href="@{/customer/delete/{id}(id=${customer.id})}" class="btn btn-danger">刪除</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div th:include="footer :: footer"></div>
 	</div>
+	
 </body>
+
 </html>
